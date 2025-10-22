@@ -81,134 +81,177 @@ eyetracker = None
 # create a default keyboard
 defaultKeyboard = keyboard.Keyboard(backend='iohub')
 
-# Define the 10 SAT reading questions
-questions = [
+# Define the SAT reading questions for both experiments
+experiment_one_questions = [
     {
-        'question': '1. According to the passage, what is the primary purpose of the author\'s argument?',
-        'options': ['A) To criticize modern technology', 'B) To advocate for environmental protection', 
-                   'C) To analyze historical trends', 'D) To promote educational reform'],
+        'question': 'Former astronaut Ellen Ochoa says that although she doesn\'t have a definite idea of when it might happen, she _______ that humans will someday need to be able to live in other environments than those found on Earth. This conjecture informs her interest in future research missions to the moon.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) demands', 'B) speculates', 'C) doubts', 'D) establishes'],
         'correct': 1  # B is correct (0-indexed)
     },
     {
-        'question': '2. The word "ubiquitous" in line 15 most nearly means:',
-        'options': ['A) Rare', 'B) Widespread', 'C) Expensive', 'D) Temporary'],
-        'correct': 1  # B is correct
-    },
-    {
-        'question': '3. Which of the following best describes the author\'s tone?',
-        'options': ['A) Optimistic', 'B) Pessimistic', 'C) Neutral', 'D) Sarcastic'],
+        'question': 'Beginning in the 1950s, Navajo Nation legislator Annie Dodge Wauneka continuously worked to promote public health; this _______ effort involved traveling throughout the vast Navajo homeland and writing a medical dictionary for speakers of Diné bizaad, the Navajo language.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) impartial', 'B) offhand', 'C) persistent', 'D) mandatory'],
         'correct': 2  # C is correct
     },
     {
-        'question': '4. The passage suggests that the main character\'s motivation was:',
-        'options': ['A) Financial gain', 'B) Personal recognition', 'C) Altruistic concern', 'D) Social pressure'],
+        'question': 'Following the principles of community-based participatory research, tribal nations and research institutions are equal partners in health studies conducted on reservations. A collaboration between the Crow Tribe and Montana State University _______ this model: tribal citizens worked alongside scientists to design the methodology and continue to assist in data collection.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) circumvents', 'B) eclipses', 'C) fabricates', 'D) exemplifies'],
+        'correct': 3  # D is correct
+    },
+    {
+        'question': 'The parasitic dodder plant increases its reproductive success by flowering at the same time as the host plant it has latched onto. In 2020, Jianqiang Wu and his colleagues determined that the tiny dodder achieves this _______ with its host by absorbing and utilizing a protein the host produces when it is about to flower.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) synchronization', 'B) hibernation', 'C) prediction', 'D) moderation'],
+        'correct': 0  # A is correct
+    },
+    {
+        'question': 'Given that the conditions in binary star systems should make planetary formation nearly impossible, it\'s not surprising that the existence of planets in such systems has lacked _______ explanation. Roman Rafikov and Kedron Silsbee shed light on the subject when they used modeling to determine a complex set of factors that could support planets\' development.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) a discernible', 'B) a straightforward', 'C) an inconclusive', 'D) an unbiased'],
+        'correct': 1  # B is correct
+    },
+    {
+        'question': 'Seminole/Muscogee director Sterlin Harjo _______ television\'s tendency to situate Native characters in the distant past: this rejection is evident in his series Reservation Dogs, which revolves around teenagers who dress in contemporary styles and whose dialogue is laced with current slang.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) repudiates', 'B) proclaims', 'C) foretells', 'D) recants'],
+        'correct': 0  # A is correct
+    },
+    {
+        'question': 'In 2007, computer scientist Luis von Ahn was working on converting printed books into a digital format. He found that some words were distorted enough that digital scanners couldn\'t recognize them, but most humans could easily read them. Based on that finding, von Ahn invented a simple security test to keep automated "bots" out of websites. The first version of the reCAPTCHA test asked users to type one known word and one of the many words scanners couldn\'t recognize. Correct answers proved the users were humans and added data to the book-digitizing project.\n\nWhich choice best states the main purpose of the text?',
+        'options': ['A) To discuss von Ahn\'s invention of reCAPTCHA', 'B) To explain how digital scanners work', 'C) To call attention to von Ahn\'s book-digitizing project', 'D) To indicate how popular reCAPTCHA is'],
+        'correct': 0  # A is correct
+    },
+    {
+        'question': 'The following text is from Edith Wharton\'s 1905 novel The House of Mirth. Lily Bart and a companion are walking through a park.\n\nLily had no real intimacy with nature, but she had a passion for the appropriate and could be keenly sensitive to a scene which was the fitting background of her own sensations. The landscape outspread below her seemed an enlargement of her present mood, and she found something of herself in its calmness, its breadth, its long free reaches. On the nearer slopes the sugar-maples wavered like pyres of light; lower down was a massing of grey orchards, and here and there the lingering green of an oak-grove.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?',
+        'options': ['A) It creates a detailed image of the physical setting of the scene.', 'B) It establishes that a character is experiencing an internal conflict.', 'C) It makes an assertion that the next sentence then expands on.', 'D) It illustrates an idea that is introduced in the previous sentence.'],
+        'correct': 0  # A is correct
+    },
+    {
+        'question': 'The following text is from Edith Wharton\'s 1905 novel The House of Mirth. Lily Bart and a companion are walking through a park.\n\nLily had no real intimacy with nature, but she had a passion for the appropriate and could be keenly sensitive to a scene which was the fitting background of her own sensations. The landscape outspread below her seemed an enlargement of her present mood, and she found something of herself in its calmness, its breadth, its long free reaches. On the nearer slopes the sugar-maples wavered like pyres of light; lower down was a massing of grey orchards, and here and there the lingering green of an oak-grove.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?',
+        'options': ['A) It creates a detailed image of the physical setting of the scene.', 'B) It establishes that a character is experiencing an internal conflict.', 'C) It makes an assertion that the next sentence then expands on.', 'D) It illustrates an idea that is introduced in the previous sentence.'],
+        'correct': 0  # A is correct
+    },
+    {
+        'question': 'The following text is adapted from Edith Nesbit\'s 1906 novel The Railway Children.\n\nMother did not spend all her time in paying dull [visits] to dull ladies, and sitting dully at home waiting for dull ladies to pay [visits] to her. She was almost always there, ready to play with the children, and read to them, and help them to do their home-lessons. Besides this she used to write stories for them while they were at school, and read them aloud after tea, and she always made up funny pieces of poetry for their birthdays and for other great occasions.\n\nAccording to the text, what is true about Mother?',
+        'options': ['A) She wishes that more ladies would visit her.', 'B) Birthdays are her favorite special occasion.', 'C) She creates stories and poems for her children.', 'D) Reading to her children is her favorite activity.'],
         'correct': 2  # C is correct
-    },
-    {
-        'question': '5. What can be inferred about the relationship between the two characters?',
-        'options': ['A) They are siblings', 'B) They are colleagues', 'C) They are rivals', 'D) They are strangers'],
-        'correct': 1  # B is correct
-    },
-    {
-        'question': '6. The author\'s use of statistics in paragraph 3 serves to:',
-        'options': ['A) Confuse the reader', 'B) Support the main argument', 'C) Introduce new topics', 'D) Create suspense'],
-        'correct': 1  # B is correct
-    },
-    {
-        'question': '7. Which statement best summarizes the central theme?',
-        'options': ['A) Technology improves society', 'B) Change is inevitable', 'C) Tradition should be preserved', 'D) Progress requires sacrifice'],
-        'correct': 1  # B is correct
-    },
-    {
-        'question': '8. The phrase "in the long run" (line 22) suggests:',
-        'options': ['A) Immediate consequences', 'B) Future implications', 'C) Historical context', 'D) Current events'],
-        'correct': 1  # B is correct
-    },
-    {
-        'question': '9. What is the author\'s attitude toward the subject matter?',
-        'options': ['A) Indifferent', 'B) Enthusiastic', 'C) Critical', 'D) Ambivalent'],
-        'correct': 2  # C is correct
-    },
-    {
-        'question': '10. The passage is most likely from:',
-        'options': ['A) A scientific journal', 'B) A newspaper editorial', 'C) A personal diary', 'D) A textbook'],
-        'correct': 1  # B is correct
     }
 ]
 
-# Initialize components for Instructions
-InstructionsClock = core.Clock()
-instructions = visual.TextStim(win=win, name='instructions',
-    text='SAT Reading Comprehension Test\n\nYou will see 10 multiple choice questions on the screen at once.\nEach question has 4 answer choices (A, B, C, D).\nClick on your chosen answer for each question.\nYou can answer the questions in any order.\nWhen you have answered all questions, click "Submit" to finish.\n\nClick anywhere to begin.',
+experiment_two_questions = [
+    {
+        'question': 'As Mexico\'s first president from an Indigenous community, Benito Juárez became one of the most _______ figures in his country\'s history: among the many significant accomplishments of his long tenure in office (1858–1872), Juárez consolidated the authority of the national government and advanced the rights of Indigenous peoples.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) unpredictable', 'B) important', 'C) secretive', 'D) ordinary'],
+        'correct': 1  # B is correct
+    },
+    {
+        'question': 'Due to their often strange images, highly experimental syntax, and opaque subject matter, many of John Ashbery\'s poems can be quite difficult to _______ and thus are the object of heated debate among scholars.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) delegate', 'B) compose', 'C) interpret', 'D) renounce'],
+        'correct': 2  # C is correct
+    },
+    {
+        'question': 'The Cambrian explosion gets its name from the sudden appearance and rapid diversification of animal remains in the fossil record about 541 million years ago, during the Cambrian period. Some scientists argue that this _______ change in the fossil record might be because of a shift in many organisms to body types that were more likely to be preserved.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) catastrophic', 'B) elusive', 'C) abrupt', 'D) imminent'],
+        'correct': 2  # C is correct
+    },
+    {
+        'question': 'During a 2014 archaeological dig in Spain, Vicente Lull and his team uncovered the skeleton of a woman from El Algar, an Early Bronze Age society, buried with valuable objects signaling a high position of power. This finding may persuade researchers who have argued that Bronze Age societies were ruled by men to _______ that women may have also held leadership roles.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) waive', 'B) concede', 'C) refute', 'D) require'],
+        'correct': 1  # B is correct
+    },
+    {
+        'question': 'Within baleen whale species, some individuals develop an accessory spleen—a seemingly functionless formation of splenetic tissue outside the normal spleen. Given the formation\'s greater prevalence among whales known to make deeper dives, some researchers hypothesize that its role isn\'t _______; rather, the accessory spleen may actively support diving mechanisms.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) replicable', 'B) predetermined', 'C) operative', 'D) latent'],
+        'correct': 2  # C is correct
+    },
+    {
+        'question': 'According to a US tax policy expert, state taxes are _______ other factors when considering an interstate move. Even significant differences in state taxation have almost no effect on most people\'s decisions, while differences in employment opportunities, housing availability, and climate are strong influences.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) consistent with', 'B) representative of', 'C) overshadowed by', 'D) irrelevant'],
+        'correct': 2  # C is correct
+    },
+    {
+        'question': 'The author\'s claim about the relationship between Neanderthals and Homo sapiens is _______, as it fails to account for several recent archaeological discoveries. To be convincing, his argument would need to address recent finds of additional hominid fossils, such as the latest Denisovan specimens and Homo longi.\n\nWhich choice completes the text with the most logical and precise word or phrase?',
+        'options': ['A) disorienting', 'B) tenuous', 'C) nuanced', 'D) unoriginal'],
+        'correct': 1  # B is correct
+    },
+    {
+        'question': 'The following text is from Georgia Douglas Johnson\'s 1922 poem "Benediction."\n\nGo forth, my son,\n Winged by my heart\'s desire!\n Great reaches, yet unknown,\n Await\n For your possession.\n I may not, if I would,\n Retrace the way with you,\n My pilgrimage is through,\n But life is calling you!\n\nWhich choice best states the main purpose of the text?',
+        'options': ['A) To express hope that a child will have the same accomplishments as his parent did', 'B) To suggest that raising a child involves many struggles', 'C) To warn a child that he will face many challenges throughout his life', 'D) To encourage a child to embrace the experiences life will offer'],
+        'correct': 3  # D is correct
+    },
+    {
+        'question': 'The following text is adapted from Indian Boyhood (1902) by Ohiyesa (Charles A. Eastman), a Santee Dakota writer. In the text, Ohiyesa recalls how the women in his tribe harvested maple syrup during his childhood.\n\nNow the women began to test the trees—moving leisurely among them, axe in hand, and striking a single quick blow, to see if the sap would appear. The trees, like people, have their individual characters; some were ready to yield up their life-blood, while others were more reluctant. Now one of the birchen basins was set under each tree, and a hardwood chip driven deep into the cut which the axe had made. From the corners of this chip—at first drop by drop, then more freely—the sap trickled into the little dishes.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?',
+        'options': ['A) It portrays the range of personality traits displayed by the women as they work.', 'B) It foregrounds the beneficial relationship between humans and maple trees.', 'C) It demonstrates how human behavior can be influenced by the natural environment.', 'D) It elaborates on an aspect of the maple trees that the women evaluate.'],
+        'correct': 3  # D is correct
+    },
+    {
+        'question': 'Text 1:\nEcologists have long wondered how thousands of microscopic phytoplankton species can live together near ocean surfaces competing for the same resources. According to conventional wisdom, one species should emerge after outcompeting the rest. So why do so many species remain? Ecologists\' many efforts to explain this phenomenon still haven\'t uncovered a satisfactory explanation.\n\nText 2:\nEcologist Michael Behrenfeld and colleagues have connected phytoplankton\'s diversity to their microscopic size. Because these organisms are so tiny, they are spaced relatively far apart from each other in ocean water and, moreover, experience that water as a relatively dense substance. This in turn makes it hard for them to move around and interact with one another. Therefore, says Behrenfeld\'s team, direct competition among phytoplankton probably happens much less than previously thought.\n\nBased on the texts, how would Behrenfeld and colleagues (Text 2) most likely respond to the "conventional wisdom" discussed in Text 1?',
+        'options': ['A) By arguing that it is based on a misconception about phytoplankton species competing with one another', 'B) By asserting that it fails to recognize that routine replenishment of ocean nutrients prevents competition between phytoplankton species', 'C) By suggesting that their own findings help clarify how phytoplankton species are able to compete with larger organisms', 'D) By recommending that more ecologists focus their research on how competition among phytoplankton species is increased with water density'],
+        'correct': 0  # A is correct
+    }
+]
+
+# Initialize components for Experiment One Instructions
+ExpOneInstructionsClock = core.Clock()
+exp_one_instructions = visual.TextStim(win=win, name='exp_one_instructions',
+    text='Experiment One\n\nYou will be shown 10 SAT Reading questions one at a time.\nEach question has 4 answer choices (A, B, C, D).\nClick on your chosen answer, then press the RIGHT ARROW key to continue to the next question.\n\nPress any key to begin.',
     font='Arial',
     pos=(0, 0), height=0.04, wrapWidth=1.2, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0)
 
-mouse_instructions = event.Mouse(win=win)
-mouse_instructions.mouseClock = core.Clock()
+# Initialize components for Experiment Two Instructions
+ExpTwoInstructionsClock = core.Clock()
+exp_two_instructions = visual.TextStim(win=win, name='exp_two_instructions',
+    text='Experiment Two\n\nYou will now be shown 10 more SAT Reading questions one at a time.\nEach question has 4 answer choices (A, B, C, D).\nClick on your chosen answer, then press the RIGHT ARROW key to continue to the next question.\n\nPress any key to begin.',
+    font='Arial',
+    pos=(0, 0), height=0.04, wrapWidth=1.2, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=0.0)
 
-# Initialize components for Test Screen
-TestClock = core.Clock()
+# Initialize components for single question display
+QuestionClock = core.Clock()
 
-# Create text stimuli for questions and answers
-question_texts = []
-answer_buttons = []
+# Question text
+question_text = visual.TextStim(win=win, name='question_text',
+    text='',
+    font='Arial',
+    pos=(0, 0.15), height=0.022, wrapWidth=1.8, ori=0,
+    color='white', colorSpace='rgb', opacity=1,
+    languageStyle='LTR', depth=0.0)
+
+# Answer options
+answer_texts = []
 answer_rects = []
 
-# Create question texts and answer buttons
-for i, q in enumerate(questions):
-    # Question text
-    q_text = visual.TextStim(win=win, name=f'question_{i+1}',
-        text=q['question'],
+for i in range(4):
+    # Answer text
+    answer_text = visual.TextStim(win=win, name=f'answer_{i}',
+        text='',
         font='Arial',
-        pos=(0, 0.4 - i*0.08), height=0.025, wrapWidth=1.8, ori=0,
+        pos=(0, 0.05 - i*0.08), height=0.018, wrapWidth=1.6, ori=0,
         color='white', colorSpace='rgb', opacity=1,
-        languageStyle='LTR', depth=0.0)
-    question_texts.append(q_text)
+        languageStyle='LTR', depth=-1.0)
+    answer_texts.append(answer_text)
     
-    # Answer options for this question
-    q_answers = []
-    q_rects = []
-    for j, option in enumerate(q['options']):
-        # Answer text
-        answer_text = visual.TextStim(win=win, name=f'answer_{i+1}_{j}',
-            text=option,
-            font='Arial',
-            pos=(-0.6 + j*0.4, 0.35 - i*0.08), height=0.02, wrapWidth=0.35, ori=0,
-            color='white', colorSpace='rgb', opacity=1,
-            languageStyle='LTR', depth=-1.0)
-        q_answers.append(answer_text)
-        
-        # Invisible rectangle for clicking
-        answer_rect = visual.Rect(win=win, name=f'click_rect_{i+1}_{j}',
-            width=0.35, height=0.05,
-            pos=(-0.6 + j*0.4, 0.35 - i*0.08),
+    # Clickable rectangle for each answer
+    answer_rect = visual.Rect(win=win, name=f'answer_rect_{i}',
+        width=1.6, height=0.08,
+        pos=(0, 0.05 - i*0.08),
             fillColor=None, lineColor='white', lineWidth=1,
             opacity=0, depth=-2.0)
-        q_rects.append(answer_rect)
-    
-    answer_buttons.append(q_answers)
-    answer_rects.append(q_rects)
+    answer_rects.append(answer_rect)
 
-# Submit button
-submit_button = visual.Rect(win=win, name='submit_button',
-    width=0.3, height=0.08,
-    pos=(0, -0.4),
-    fillColor='green', lineColor='white', lineWidth=2,
-    opacity=1, depth=-1.0)
-
-submit_text = visual.TextStim(win=win, name='submit_text',
-    text='Submit Answers',
+# Continue instruction
+continue_text = visual.TextStim(win=win, name='continue_text',
+    text='Press RIGHT ARROW to continue',
     font='Arial',
-    pos=(0, -0.4), height=0.03, wrapWidth=None, ori=0,
-    color='white', colorSpace='rgb', opacity=1,
-    languageStyle='LTR', depth=-2.0)
+    pos=(0, -0.25), height=0.025, wrapWidth=None, ori=0,
+    color='yellow', colorSpace='rgb', opacity=1,
+    languageStyle='LTR', depth=-3.0)
 
-# Mouse for test
-mouse_test = event.Mouse(win=win)
-mouse_test.mouseClock = core.Clock()
+# Mouse for question interaction
+mouse_question = event.Mouse(win=win)
+mouse_question.mouseClock = core.Clock()
 
 # Initialize components for Results
 ResultsClock = core.Clock()
@@ -232,209 +275,148 @@ thank_you = visual.TextStim(win=win, name='thank_you',
 globalClock = core.Clock()
 routineTimer = core.CountdownTimer()
 
-# ------Prepare to start Routine "Instructions"-------
-continueRoutine = True
-mouse_instructions.clicked_name = []
-gotValidClick = False
-
-InstructionsComponents = [instructions, mouse_instructions]
-for thisComponent in InstructionsComponents:
-    thisComponent.tStart = None
-    thisComponent.tStop = None
-    thisComponent.tStartRefresh = None
-    thisComponent.tStopRefresh = None
-    if hasattr(thisComponent, 'status'):
-        thisComponent.status = NOT_STARTED
-
-t = 0
-_timeToFirstFrame = win.getFutureFlipTime(clock="now")
-InstructionsClock.reset(-_timeToFirstFrame)
-frameN = -1
-
-# -------Run Routine "Instructions"-------
-while continueRoutine:
-    t = InstructionsClock.getTime()
-    tThisFlip = win.getFutureFlipTime(clock=InstructionsClock)
-    tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-    frameN = frameN + 1
+# Function to run instruction screen
+def run_instruction_screen(instruction_text):
+    continueRoutine = True
     
-    # *instructions* updates
-    if instructions.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-        instructions.frameNStart = frameN
-        instructions.tStart = t
-        instructions.tStartRefresh = tThisFlipGlobal
-        win.timeOnFlip(instructions, 'tStartRefresh')
-        instructions.setAutoDraw(True)
+    # Setup components
+    instruction_text.setAutoDraw(True)
     
-    # *mouse_instructions* updates
-    if mouse_instructions.status == NOT_STARTED and t >= 0-frameTolerance:
-        mouse_instructions.frameNStart = frameN
-        mouse_instructions.tStart = t
-        mouse_instructions.tStartRefresh = tThisFlipGlobal
-        win.timeOnFlip(mouse_instructions, 'tStartRefresh')
-        mouse_instructions.status = STARTED
-        mouse_instructions.mouseClock.reset()
-        prevButtonState = mouse_instructions.getPressed()
+    # Reset keyboard
+    defaultKeyboard.clearEvents()
     
-    if mouse_instructions.status == STARTED:
-        buttons = mouse_instructions.getPressed()
-        if buttons != prevButtonState:
-            prevButtonState = buttons
-            if sum(buttons) > 0:
-                gotValidClick = True
-                if gotValidClick:
-                    continueRoutine = False
+    while continueRoutine:
+        # Check for any key press using event.getKeys
+        keys = event.getKeys(keyList=None)
+        if keys:
+            continueRoutine = False
     
-    # check for quit
-    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
-        core.quit()
+        # Check for quit
+        if endExpNow:
+            core.quit()
     
-    if not continueRoutine:
-        break
-    continueRoutine = False
-    for thisComponent in InstructionsComponents:
-        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-            continueRoutine = True
-            break
-    
-    if continueRoutine:
         win.flip()
 
-# -------Ending Routine "Instructions"-------
-for thisComponent in InstructionsComponents:
-    if hasattr(thisComponent, "setAutoDraw"):
-        thisComponent.setAutoDraw(False)
+    instruction_text.setAutoDraw(False)
 
-thisExp.addData('instructions.started', instructions.tStartRefresh)
-thisExp.addData('instructions.stopped', instructions.tStopRefresh)
-thisExp.nextEntry()
-
-# ------Prepare to start Routine "Test"-------
-continueRoutine = True
-
-# Initialize tracking variables
-selected_answers = [None] * 10  # Track selected answer for each question
-test_start_time = None
-test_end_time = None
-
-# Setup mouse for test
-mouse_test.clicked_name = []
-gotValidClick = False
-
-# Keep track of which components have finished
-TestComponents = question_texts + [item for sublist in answer_buttons for item in sublist] + [item for sublist in answer_rects for item in sublist] + [submit_button, submit_text, mouse_test]
-
-for thisComponent in TestComponents:
-    thisComponent.tStart = None
-    thisComponent.tStop = None
-    thisComponent.tStartRefresh = None
-    thisComponent.tStopRefresh = None
+# Function to run a single question
+def run_single_question(question_data, question_num, total_questions):
+    continueRoutine = True
+    selected_answer = None
+    question_start_time = None
+    
+    # Set question text
+    question_text.setText(f"Question {question_num} of {total_questions}\n\n{question_data['question']}")
+    
+    # Set answer options
+    for i, option in enumerate(question_data['options']):
+        answer_texts[i].setText(option)
+        answer_texts[i].color = 'white'  # Reset color
+    
+    # Reset mouse
+    mouse_question.clicked_name = []
+    prevButtonState = mouse_question.getPressed()
+    
+    # Setup components
+    QuestionComponents = [question_text] + answer_texts + answer_rects + [continue_text, mouse_question]
+    for thisComponent in QuestionComponents:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
 
+    # Create a new clock for this question
+    question_clock = core.Clock()
 t = 0
 _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-TestClock.reset(-_timeToFirstFrame)
+    question_clock.reset()
 frameN = -1
 
-# -------Run Routine "Test"-------
 while continueRoutine:
-    t = TestClock.getTime()
-    tThisFlip = win.getFutureFlipTime(clock=TestClock)
+        t = question_clock.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=question_clock)
     tThisFlipGlobal = win.getFutureFlipTime(clock=None)
     frameN = frameN + 1
     
-    # Record test start time
-    if test_start_time is None:
-        test_start_time = t
-    
-    # *question_texts* updates
-    for i, q_text in enumerate(question_texts):
-        if q_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            q_text.frameNStart = frameN
-            q_text.tStart = t
-            q_text.tStartRefresh = tThisFlipGlobal
-            win.timeOnFlip(q_text, 'tStartRefresh')
-            q_text.setAutoDraw(True)
-    
-    # *answer_buttons* updates
-    for i, q_answers in enumerate(answer_buttons):
-        for j, answer in enumerate(q_answers):
-            if answer.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                answer.frameNStart = frameN
-                answer.tStart = t
-                answer.tStartRefresh = tThisFlipGlobal
-                win.timeOnFlip(answer, 'tStartRefresh')
-                answer.setAutoDraw(True)
-    
-    # *answer_rects* updates (invisible clickable areas)
-    for i, q_rects in enumerate(answer_rects):
-        for j, rect in enumerate(q_rects):
-            if rect.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                rect.frameNStart = frameN
-                rect.tStart = t
-                rect.tStartRefresh = tThisFlipGlobal
-                win.timeOnFlip(rect, 'tStartRefresh')
-                rect.setAutoDraw(True)
-    
-    # *submit_button* updates
-    if submit_button.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-        submit_button.frameNStart = frameN
-        submit_button.tStart = t
-        submit_button.tStartRefresh = tThisFlipGlobal
-        win.timeOnFlip(submit_button, 'tStartRefresh')
-        submit_button.setAutoDraw(True)
-    
-    # *submit_text* updates
-    if submit_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-        submit_text.frameNStart = frameN
-        submit_text.tStart = t
-        submit_text.tStartRefresh = tThisFlipGlobal
-        win.timeOnFlip(submit_text, 'tStartRefresh')
-        submit_text.setAutoDraw(True)
-    
-    # *mouse_test* updates
-    if mouse_test.status == NOT_STARTED and t >= 0-frameTolerance:
-        mouse_test.frameNStart = frameN
-        mouse_test.tStart = t
-        mouse_test.tStartRefresh = tThisFlipGlobal
-        win.timeOnFlip(mouse_test, 'tStartRefresh')
-        mouse_test.status = STARTED
-        mouse_test.mouseClock.reset()
-        prevButtonState = mouse_test.getPressed()
-    
-    if mouse_test.status == STARTED:
-        buttons = mouse_test.getPressed()
+        # Record question start time
+        if question_start_time is None:
+            question_start_time = t
+        
+        # *question_text* updates
+        if question_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            question_text.frameNStart = frameN
+            question_text.tStart = t
+            question_text.tStartRefresh = tThisFlipGlobal
+            win.timeOnFlip(question_text, 'tStartRefresh')
+            question_text.setAutoDraw(True)
+        
+        # *answer_texts* updates
+        for i, answer_text in enumerate(answer_texts):
+            if answer_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                answer_text.frameNStart = frameN
+                answer_text.tStart = t
+                answer_text.tStartRefresh = tThisFlipGlobal
+                win.timeOnFlip(answer_text, 'tStartRefresh')
+                answer_text.setAutoDraw(True)
+        
+        # *answer_rects* updates
+        for i, answer_rect in enumerate(answer_rects):
+            if answer_rect.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                answer_rect.frameNStart = frameN
+                answer_rect.tStart = t
+                answer_rect.tStartRefresh = tThisFlipGlobal
+                win.timeOnFlip(answer_rect, 'tStartRefresh')
+                answer_rect.setAutoDraw(True)
+        
+        # *continue_text* updates
+        if continue_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            continue_text.frameNStart = frameN
+            continue_text.tStart = t
+            continue_text.tStartRefresh = tThisFlipGlobal
+            win.timeOnFlip(continue_text, 'tStartRefresh')
+            continue_text.setAutoDraw(True)
+        
+        # *mouse_question* updates
+        if mouse_question.status == NOT_STARTED and t >= 0-frameTolerance:
+            mouse_question.frameNStart = frameN
+            mouse_question.tStart = t
+            mouse_question.tStartRefresh = tThisFlipGlobal
+            win.timeOnFlip(mouse_question, 'tStartRefresh')
+            mouse_question.status = STARTED
+            mouse_question.mouseClock.reset()
+            prevButtonState = mouse_question.getPressed()
+        
+        if mouse_question.status == STARTED:
+            buttons = mouse_question.getPressed()
         if buttons != prevButtonState:
             prevButtonState = buttons
             if sum(buttons) > 0:
                 # Check for clicks on answer options
-                for i, q_rects in enumerate(answer_rects):
-                    for j, rect in enumerate(q_rects):
-                        if rect.contains(mouse_test):
-                            selected_answers[i] = j
+                    for i, rect in enumerate(answer_rects):
+                        if rect.contains(mouse_question):
+                            selected_answer = i
                             # Visual feedback - change color of selected answer
-                            answer_buttons[i][j].color = 'yellow'
-                            # Reset other options for this question
-                            for k, other_answer in enumerate(answer_buttons[i]):
-                                if k != j:
+                            answer_texts[i].color = 'yellow'
+                            # Reset other options
+                            for j, other_answer in enumerate(answer_texts):
+                                if j != i:
                                     other_answer.color = 'white'
                 
-                # Check for submit button click
-                if submit_button.contains(mouse_test):
-                    # Check if all questions are answered
-                    if None not in selected_answers:
-                        test_end_time = t
+        # Check for right arrow key to continue
+        keys = event.getKeys(keyList=["right"])
+        if keys and selected_answer is not None:
                         continueRoutine = False
     
     # check for quit
-    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+        if endExpNow or event.getKeys(keyList=["escape"]):
         core.quit()
     
     if not continueRoutine:
         break
     continueRoutine = False
-    for thisComponent in TestComponents:
+        for thisComponent in QuestionComponents:
         if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
             continueRoutine = True
             break
@@ -442,30 +424,69 @@ while continueRoutine:
     if continueRoutine:
         win.flip()
 
-# -------Ending Routine "Test"-------
-for thisComponent in TestComponents:
+    # Clean up
+    for thisComponent in QuestionComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
 
-# Calculate results
-total_time = test_end_time - test_start_time if test_end_time and test_start_time else 0
-correct_answers = 0
+    question_time = t - question_start_time if question_start_time else 0
+    is_correct = selected_answer == question_data['correct'] if selected_answer is not None else False
+    
+    return selected_answer, question_time, is_correct
 
-for i, selected in enumerate(selected_answers):
-    if selected is not None and selected == questions[i]['correct']:
-        correct_answers += 1
+# Function to run experiment
+def run_experiment(questions, experiment_name):
+    # Run instruction screen
+    if experiment_name == "Experiment One":
+        run_instruction_screen(exp_one_instructions)
+    else:
+        run_instruction_screen(exp_two_instructions)
+    
+    # Track results
+    selected_answers = []
+    question_times = []
+    correct_answers = 0
+    total_time = 0
+    
+    # Run each question
+    for i, question in enumerate(questions):
+        selected, q_time, is_correct = run_single_question(question, i+1, len(questions))
+        selected_answers.append(selected)
+        question_times.append(q_time)
+        total_time += q_time
+        if is_correct:
+            correct_answers += 1
+        
+        # Store individual question data
+        thisExp.addData(f'{experiment_name.lower().replace(" ", "_")}_question_{i+1}_selected', selected)
+        thisExp.addData(f'{experiment_name.lower().replace(" ", "_")}_question_{i+1}_correct', question['correct'])
+        thisExp.addData(f'{experiment_name.lower().replace(" ", "_")}_question_{i+1}_right', is_correct)
+        thisExp.addData(f'{experiment_name.lower().replace(" ", "_")}_question_{i+1}_time', q_time)
+    
+    # Store experiment summary data
+    thisExp.addData(f'{experiment_name.lower().replace(" ", "_")}_total_time', total_time)
+    thisExp.addData(f'{experiment_name.lower().replace(" ", "_")}_correct_answers', correct_answers)
+    thisExp.addData(f'{experiment_name.lower().replace(" ", "_")}_total_questions', len(questions))
+    thisExp.addData(f'{experiment_name.lower().replace(" ", "_")}_percentage', (correct_answers / len(questions)) * 100)
+    
+    return correct_answers, total_time, len(questions)
 
-# Store data
-thisExp.addData('total_time', total_time)
-thisExp.addData('correct_answers', correct_answers)
-thisExp.addData('total_questions', 10)
-thisExp.addData('percentage', (correct_answers / 10) * 100)
+# ------Run Experiment One-------
+exp_one_correct, exp_one_time, exp_one_total = run_experiment(experiment_one_questions, "Experiment One")
 
-# Store individual question data
-for i, selected in enumerate(selected_answers):
-    thisExp.addData(f'question_{i+1}_selected', selected)
-    thisExp.addData(f'question_{i+1}_correct', questions[i]['correct'])
-    thisExp.addData(f'question_{i+1}_right', selected == questions[i]['correct'] if selected is not None else False)
+# ------Run Experiment Two-------
+exp_two_correct, exp_two_time, exp_two_total = run_experiment(experiment_two_questions, "Experiment Two")
+
+# Calculate overall results
+total_correct = exp_one_correct + exp_two_correct
+total_questions = exp_one_total + exp_two_total
+total_time = exp_one_time + exp_two_time
+
+# Store overall data
+thisExp.addData('overall_correct_answers', total_correct)
+thisExp.addData('overall_total_questions', total_questions)
+thisExp.addData('overall_total_time', total_time)
+thisExp.addData('overall_percentage', (total_correct / total_questions) * 100)
 
 thisExp.nextEntry()
 
@@ -474,7 +495,7 @@ continueRoutine = True
 routineTimer.add(5.000000)
 
 # Update results text
-results_text.setText(f'Test Complete!\n\nCorrect Answers: {correct_answers}/10\nTotal Time: {total_time:.2f} seconds\nPercentage: {(correct_answers/10)*100:.1f}%')
+results_text.setText(f'Test Complete!\n\nExperiment One: {exp_one_correct}/{exp_one_total} correct\nExperiment Two: {exp_two_correct}/{exp_two_total} correct\n\nOverall: {total_correct}/{total_questions} correct\nTotal Time: {total_time:.2f} seconds\nOverall Percentage: {(total_correct/total_questions)*100:.1f}%')
 
 ResultsComponents = [results_text]
 for thisComponent in ResultsComponents:
